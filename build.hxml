@@ -1,0 +1,23 @@
+-cp src
+
+# Uncomment the desirable target
+# JavaScript target
+# -js out/haxe_unit2.js
+
+# SWF 9 target
+# -swf9 out/haxe_unit2.swf
+
+# ActionScript3 target
+# -as3 out
+
+# Neko target
+-neko out/haxe_unit2.n
+
+# PHP target
+# -php out
+
+# C++ target
+# -cpp out
+
+# Uncomment and place your main class with package
+-main haxe.unit2.tests.TestMain
