@@ -47,91 +47,92 @@ class TestStatus {
     public function new() 	{
         this.done = false;
         this.success = false;
-	}
+    }
 
     /**
      * Sets the done status of the test
      */
-	public function setDone( done : Bool ) : Void {
-	   this.done = done;
-	}
+    public function setDone( done : Bool ) : Void {
+        this.done = done;
+    }
 
     /**
      * Indicates if a test is done
      */
-	public function isDone() : Bool {
-	   return this.done;
-	}
+    public function isDone() : Bool {
+        return this.done;
+    }
 
     /**
      * Sets the success status of a test
      */
-	public function setSuccess( success : Bool ) {
-	   this.success = success;
-	}
+     public function setSuccess( success : Bool ) {
+        this.success = success;
+    }
 
     /**
      * Indicates if a test was a success
      */
-	public function isSuccess() : Bool {
-	   return this.success;
-	}
+    public function isSuccess() : Bool {
+        return this.success;
+    }
 
     /**
      * Sets the error message of a test that failed
      */
-	public function setError( error : String ) : Void {
-	   this.error = error;
-	}
+    public function setError( error : String ) : Void {
+        this.error = error;
+    }
 
     /**
      * Returns the error message of a test that failed
      */
-	public function getError() : String {
-	   return this.error;
-	}
+    public function getError() : String {
+        return this.error;
+    }
 
     /**
      *
      */
-	public function setMethod( method : String ) : Void {
-	   this.method = method;
-	}
+    public function setMethod( method : String ) : Void {
+        this.method = method;
+    }
 
     /**
      *
      */
-	public function getMethod() : String {
-	   return this.method;
-	}
+    public function getMethod() : String {
+        return this.method;
+    }
 
     /**
      *
      */
-	public function setClassName( className : String ) : Void {
-	   this.className = className;
-	}
+    public function setClassName( className : String ) : Void {
+        this.className = className;
+    }
 
-	public function getClassName() : String {
-	   return this.className;
-	}
+
+    public function getClassName() : String {
+        return this.className;
+    }
 
     /**
      *
      */
-	public function setPosInfos( posInfos : PosInfos ) {
-	   this.posInfos = posInfos;
-	}
+    public function setPosInfos( posInfos : PosInfos ) {
+        this.posInfos = posInfos;
+    }
 
-	public function getPosInfos() : PosInfos {
-	   return this.posInfos;
-	}
+    public function getPosInfos() : PosInfos {
+        return this.posInfos;
+    }
 
-	public function setBackTrace( backTrace : String ) : Void {
-	   this.backTrace = backTrace;
-	}
+    public function setBackTrace( backTrace : String ) : Void {
+        this.backTrace = backTrace;
+    }
 
-	public function getBackTrace() : String {
-	   return this.backTrace;
+    public function getBackTrace() : String {
+        return this.backTrace;
     }
 }

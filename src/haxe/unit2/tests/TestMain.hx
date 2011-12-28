@@ -39,6 +39,7 @@ class TestMain {
     public static function main() : Void {
         var testRunner : TestRunner = new TestRunner();
         testRunner.add(new TestCaseTest());
+        testRunner.add(new TextOutputWriterTest());
         testRunner.run();
     }
 

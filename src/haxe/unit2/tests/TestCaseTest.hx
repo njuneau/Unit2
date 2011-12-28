@@ -25,6 +25,7 @@
 package haxe.unit2.tests;
 
 import haxe.unit.TestCase;
+import haxe.unit2.TestRunner;
 import haxe.unit2.tests.mocks.MockTestCase1;
 
 /**
@@ -37,7 +38,10 @@ class TestCaseTest extends TestCase {
      */
     public function testMockTestCase1() :Void {
         var mock : MockTestCase1 = new MockTestCase1();
-        mock.run();
+        var testRunner : TestRunner = new TestRunner();
+        testRunner.add(mock);
+        testRunner.run();
+
         this.assertEquals(mock.getSetupCount(), MockTestCase1.TEST_COUNT);
         this.assertEquals(mock.getTearDownCount(), MockTestCase1.TEST_COUNT);
         this.assertEquals(mock.getTestCount(), MockTestCase1.TEST_COUNT);

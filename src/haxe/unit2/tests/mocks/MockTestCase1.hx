@@ -1,12 +1,12 @@
 package haxe.unit2.tests.mocks;
 
-import haxe.unit2.TestCaseImpl;
+import haxe.unit2.TestCase;
 
 /**
  * This is a mock test case that tests the various functions of the TestCase class
  * This test should cover most basic functions of the TestCase implementation
  */
-class MockTestCase1 extends TestCaseImpl {
+class MockTestCase1 extends TestCase {
 
     // The number of tests to run in this class. KEEP THIS UP TO DATE!
     public static var TEST_COUNT : Int = 2;
@@ -26,12 +26,12 @@ class MockTestCase1 extends TestCaseImpl {
     /**
      * Reset all values at each run.
      */
-    public override function run() : Void {
+    public override function prepare() : Void {
         this.testCount = 0;
         this.setupCount = 0;
         this.tearDownCount = 0;
         this.ranFakeTest = false;
-        super.run();
+        super.prepare();
     }
 
     /**
@@ -88,6 +88,7 @@ class MockTestCase1 extends TestCaseImpl {
         this.assertTrue(true);
         this.assertTrue(3 > 1);
         this.assertFalse(1 > 3);
+        this.testCount++;
     }
 
     /**************************************************************************/
