@@ -74,6 +74,7 @@ class TextOutputWriter implements OutputWriter {
 
                     // Build the test error string
                     testErrorString.add("\r\n");
+                    testErrorString.add("Caught exception : \t");
                     testErrorString.add(statuses[i].getError());
                     testErrorString.add("\r\n");
                     testErrorString.add(statuses[i].getBackTrace());

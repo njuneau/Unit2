@@ -93,7 +93,7 @@ class TestRunner {
                             Reflect.callMethod(this.tests[i], field, new Array());
                             this.tests[i].tearDown();
                             this.testStatuses[i].setSuccess(true);
-                        } catch (e : AssertionError) {
+                        } catch (e : AssertionException) {
                             this.testStatuses[i].setError(e.getMessage());
                             this.testStatuses[i].setBackTrace(Stack.toString(Stack.exceptionStack()));
                             this.testStatuses[i].setSuccess(false);
@@ -101,13 +101,14 @@ class TestRunner {
                             // Test fails if there's an error to catch
                             #if js
                             if(e.message != null) {
-                                this.testStatuses[i].setError("Exception thrown : " + e + " [" + e.message + "]");
+                                this.testStatuses[i].setError(e + " [" + e.message + "]");
                             } else {
-                                this.testStatuses[i].setError("Exception thrown : " + e);
+                                this.testStatuses[i].setError(e);
                             }
                             #else
-                            this.testStatuses[i].setError("Exception thrown : " + e);
+                            this.testStatuses[i].setError(e);
                             #end
+
                             this.testStatuses[i].setBackTrace(Stack.toString(Stack.exceptionStack()));
                             this.testStatuses[i].setSuccess(false);
                         }

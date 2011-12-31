@@ -3,9 +3,9 @@ package haxe.unit2;
 import haxe.PosInfos;
 
 /**
- * This kind of error is thrown when an assertion fails in a test case
+ * This kind of exception is thrown when an assertion fails in a test case
  */
-class AssertionError {
+class AssertionException {
 
     private var message : String;
     private var posInfos : PosInfos;

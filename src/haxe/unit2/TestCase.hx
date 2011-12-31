@@ -67,7 +67,7 @@ class TestCase {
      */
     private function assertTrue(b : Bool, ?c : PosInfos) : Void {
         if(b != true) {
-            throw new AssertionError("Expected true, but was given false", c);
+            throw new AssertionException("Expected true, but was given false", c);
         }
     }
 
@@ -76,7 +76,7 @@ class TestCase {
      */
     private function assertFalse(b : Bool, ?c : PosInfos) : Void {
         if(b != false) {
-            throw new AssertionError("Expected false, but was given true", c);
+            throw new AssertionException("Expected false, but was given true", c);
         }
     }
 
@@ -85,7 +85,7 @@ class TestCase {
      */
     private function assertEquals<T>(expected : T, actual : T, ?c : PosInfos) : Void {
         if (actual != expected) {
-            throw new AssertionError("Expected '" + expected + "', but was given '" + actual + "'", c);
+            throw new AssertionException("Expected '" + expected + "', but was given '" + actual + "'", c);
         }
     }
 
