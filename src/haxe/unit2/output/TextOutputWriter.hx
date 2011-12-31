@@ -18,12 +18,12 @@ class TextOutputWriter implements OutputWriter {
     private static var H2_LINE : String = "--------------------------------------------------------------------------------\r\n";
     private static var STATUS_OK : String = "[ OK ]";
     private static var STATUS_FAIL : String = "[ FAIL ]";
-    private static var STATUS_DNF : String = "[ DID NOT FINISH ]";
+    private static var STATUS_DNR : String = "[ DID NOT RUN ]";
 
     private static var TOTAL : String = "Total";
     private static var TOTAL_SUCCEEDED : String = "Succeeded";
     private static var TOTAL_FAILED : String = "Failed";
-    private static var TOTAL_DNF : String = "Did not finish";
+    private static var TOTAL_DNR : String = "Did not run";
 
     /**
      * Default constructor
@@ -50,30 +50,45 @@ class TextOutputWriter implements OutputWriter {
 
         // Loop through all the flags
         output.add(H2_LINE);
-        for(test in testRunner) {
-            var actualStatus : TestStatus = test.getStatus();
-            output.add(Type.getClassName(Type.getClass(test)));
+
+        var tests : Array<TestCase> = testRunner.getTests();
+        var statuses : Array<TestStatus> = testRunner.getTestStatuses();
+
+        var i : Int = 0;
+        while(i < tests.length) {
+
+            output.add(Type.getClassName(Type.getClass(tests[i])));
             output.add("\t");
 
             var testStatusString : String;
+            var testErrorString : StringBuf = new StringBuf();
 
             // Write status string according to test status
-            if(actualStatus.isDone()) {
-                if(actualStatus.isSuccess()) {
+            if(statuses[i].isDone()) {
+                if(statuses[i].isSuccess()) {
                     testStatusString = STATUS_OK;
                     succeeded++;
                 } else {
                     testStatusString = STATUS_FAIL;
                     failed++;
+
+                    // Build the test error string
+                    testErrorString.add("\r\n");
+                    testErrorString.add(statuses[i].getError());
+                    testErrorString.add("\r\n");
+                    testErrorString.add(statuses[i].getBackTrace());
                 }
             } else {
-                testStatusString = STATUS_DNF;
+                testStatusString = STATUS_DNR;
                 unfinished++;
             }
 
             output.add(testStatusString);
+            output.add(testErrorString);
             output.add("\r\n");
             output.add(H2_LINE);
+
+            i++;
         }
 
         output.add(H2_LINE);
@@ -92,7 +107,7 @@ class TextOutputWriter implements OutputWriter {
         output.add(failed);
         output.add("\r\n");
 
-        output.add(TOTAL_DNF);
+        output.add(TOTAL_DNR);
         output.add("\t");
         output.add(unfinished);
         output.add("\r\n");

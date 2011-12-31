@@ -24,8 +24,6 @@
  */
 package haxe.unit2;
 
-import haxe.Stack;
-
 import haxe.PosInfos;
 
 /**
@@ -36,17 +34,21 @@ class TestStatus {
     private var done : Bool;
     private var success : Bool;
     private var error : String;
-    private var method : String;
-    private var className : String;
-    private var posInfos : PosInfos;
     private var backTrace : String;
+    private var methodName : String;
+    private var className : String;
 
     /**
-     * Default constructor, intialises the status to not done, failing.
+     * Intialises the status to not done, failing. Specify the class' name
+     * and the method's name.
      */
-    public function new() 	{
+    public function new(className : String, methodName : String) {
+        this.className = className;
+        this.methodName = methodName;
         this.done = false;
         this.success = false;
+        this.error = null;
+        this.backTrace = null;
     }
 
     /**
@@ -80,59 +82,45 @@ class TestStatus {
     /**
      * Sets the error message of a test that failed
      */
-    public function setError( error : String ) : Void {
+    public function setError(error : String) : Void {
         this.error = error;
     }
 
     /**
-     * Returns the error message of a test that failed
+     * Returns this status' method name
+     */
+    public function getMethodName() : String {
+        return this.methodName;
+    }
+
+    /**
+     * Return this status' class name
+     */
+    public function getClassName() : String {
+        return this.className;
+    }
+
+    /**
+     * Returns the error message of a test that failed. Returns null if there
+     * are no errors for the test
      */
     public function getError() : String {
         return this.error;
     }
 
     /**
-     *
+     * Sets the error's backtrace
      */
-    public function setMethod( method : String ) : Void {
-        this.method = method;
-    }
-
-    /**
-     *
-     */
-    public function getMethod() : String {
-        return this.method;
-    }
-
-    /**
-     *
-     */
-    public function setClassName( className : String ) : Void {
-        this.className = className;
-    }
-
-
-    public function getClassName() : String {
-        return this.className;
-    }
-
-    /**
-     *
-     */
-    public function setPosInfos( posInfos : PosInfos ) {
-        this.posInfos = posInfos;
-    }
-
-    public function getPosInfos() : PosInfos {
-        return this.posInfos;
-    }
-
-    public function setBackTrace( backTrace : String ) : Void {
+    public function setBackTrace(backTrace : String) {
         this.backTrace = backTrace;
     }
 
+    /**
+     * Returns the backtrace of the error, if any. Returns null if there was no
+     * errors.
+     */
     public function getBackTrace() : String {
         return this.backTrace;
     }
+
 }

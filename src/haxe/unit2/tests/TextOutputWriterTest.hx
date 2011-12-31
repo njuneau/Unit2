@@ -17,7 +17,7 @@ class TextOutputWriterTest extends TestCase {
         var outputWriter : TextOutputWriter = new TextOutputWriter();
         var successPattern : String = "[ OK ]";
         var failPattern : String = "[ FAIL ]";
-        var dnfPattern : String = "[ DID NOT FINISH ]";
+        var dnrPattern : String = "[ DID NOT RUN ]";
         var tests : List<haxe.unit2.TestCase> = new List<haxe.unit2.TestCase>();
         tests.add(new MockTestCase1());
         tests.add(new MockTestCase1());
@@ -34,7 +34,7 @@ class TextOutputWriterTest extends TestCase {
         var lastPos :Int = 0;
 
         while(i < tests.length) {
-            lastPos = result.indexOf(dnfPattern, lastPos);
+            lastPos = result.indexOf(dnrPattern, lastPos);
             this.assertTrue(lastPos != -1);
             i++;
         }

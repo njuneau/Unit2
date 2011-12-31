@@ -38,16 +38,12 @@ import haxe.Stack;
  * to override these methods in your own TestCase implementation, should you
  * need them.
  */
-class TestCase #if mt_build implements mt.Protect, #end {
-
-    private var status : TestStatus;
+class TestCase {
 
     /**
      * Default empty constructor
      */
-    public function new() {
-        this.status = new TestStatus();
-    }
+    public function new() {}
 
     /**
      * This method is called before a TestRunner starts executing tests on this
@@ -64,57 +60,33 @@ class TestCase #if mt_build implements mt.Protect, #end {
     /**
      * This method is called after each test is ran
      */
-    public function tearDown() : Void {
-        status.setDone(true);
-    }
+    public function tearDown() : Void {}
 
     /**
-     * Asserts that the given value is true. If it is not true, the test will fail.
+     * Asserts that the given value is true. If it is not true, an error will be thrown.
      */
     private function assertTrue(b : Bool, ?c : PosInfos) : Void {
         if(b != true) {
-            this.status.setSuccess(false);
-            this.status.setError("Expected true but was given false");
-            this.status.setPosInfos(c);
-            throw status;
+            throw new AssertionError("Expected true, but was given false", c);
         }
     }
 
     /**
-     * Asserts that the given value is false. If it is not false, the test will fail.
+     * Asserts that the given value is false. If it is not false, an error will be thrown
      */
     private function assertFalse(b : Bool, ?c : PosInfos) : Void {
         if(b != false) {
-            this.status.setSuccess(false);
-            this.status.setError("Expected false but was given true");
-            this.status.setPosInfos(c);
-            throw status;
+            throw new AssertionError("Expected false, but was given true", c);
         }
     }
 
     /**
-     * Asserts that two given objects are equal. If they are not, the test will fail.
+     * Asserts that two given objects are equal. If they are not, an thrown will be thrown
      */
-    private function assertEquals<T>(expected : T, actual : T, ?c : PosInfos) : Void 	{
-        if (actual != expected){
-            this.status.setSuccess(false);
-            this.status.setError("Expected '" + expected + "' but was given '" + actual + "'");
-            this.status.setPosInfos(c);
-            throw status;
+    private function assertEquals<T>(expected : T, actual : T, ?c : PosInfos) : Void {
+        if (actual != expected) {
+            throw new AssertionError("Expected '" + expected + "', but was given '" + actual + "'", c);
         }
     }
 
-    /**
-     * Returns this class' status
-     */
-    public function getStatus() : TestStatus {
-        return this.status;
-    }
-
-    /**
-     * Sets this class' status
-     */
-    public function setStatus(status : TestStatus) {
-        this.status = status;
-    }
 }

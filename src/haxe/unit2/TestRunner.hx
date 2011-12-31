@@ -35,40 +35,41 @@ class TestRunner {
 
     private static var META_NAME = "Test";
 
-
-    private var tests  : List<TestCase>;
+    private var tests  : Array<TestCase>;
+    private var testStatuses : Array<TestStatus>;
     private var success : Bool;
 
     /**
      * Constructs a new instance with an empty test case list
      */
     public function new() {
-        this.tests = new List();
+        this.tests = new Array<TestCase>();
+        this.testStatuses = new Array<TestStatus>();
         this.success = false;
     }
 
     /**
      * Adds a test case to the list
      */
-    public function add( t:TestCase ) : Void{
-        this.tests.add(t);
+    public function add(t : TestCase) : Void{
+        this.tests.push(t);
+        this.testStatuses.push(new TestStatus(Type.getClassName(Type.getClass(t)), ""));
     }
 
     /**
      * Runs all the tests in the test runner
      */
     public function run() : Void {
-        var testIterator : Iterator<TestCase> = this.tests.iterator();
-        var currentTest : TestCase;
         this.success = true;
 
+        var i : Int = 0;
         // Run all the tests, and stop as soon as there's a error
-        while(this.success && testIterator.hasNext()) {
-            var currentTest : TestCase = testIterator.next();
-            var cl : Class<TestCase> = Type.getClass(currentTest);
+        while(this.success && i < this.tests.length) {
+            var cl : Class<TestCase> = Type.getClass(this.tests[i]);
             var fields : Array<String> = Type.getInstanceFields(cl);
             var classMeta : Dynamic<Dynamic<Array<Dynamic>>> = Meta.getFields(cl);
-            currentTest.prepare();
+
+            this.tests[i].prepare();
 
             // Iterate over all the TestCase's fields to look for test methods
             var fieldIterator : Iterator<String> = fields.iterator();
@@ -76,51 +77,64 @@ class TestRunner {
             while(this.success && fieldIterator.hasNext()) {
                 var fieldName = fieldIterator.next();
                 var meta : Dynamic<Array<Dynamic>> = Reflect.field(classMeta, fieldName);
-                var field : Dynamic = Reflect.field(currentTest, fieldName);
+                var field : Dynamic = Reflect.field(this.tests[i], fieldName);
 
                 // If the current field is a method and has metadata
-                if (Reflect.isFunction(field) && meta != null ) {
+                if (Reflect.isFunction(field) && meta != null) {
 
                     // If the current method has a "Test" metadata declaration
                     if(Reflect.hasField(meta, META_NAME)) {
-                        var testStatus : TestStatus = new TestStatus();
-                        testStatus.setClassName(Type.getClassName(cl));
-                        testStatus.setMethod(fieldName);
-                        currentTest.setStatus(testStatus);
-                        currentTest.setup();
+
+                        this.testStatuses[i] = new TestStatus(Type.getClassName(cl), fieldName);
 
                         // Execute a test case
                         try {
-                            Reflect.callMethod(this, field, new Array());
-                        } catch (e : TestStatus) {
-                            testStatus.setBackTrace(Stack.toString(Stack.exceptionStack()));
+                            this.tests[i].setup();
+                            Reflect.callMethod(this.tests[i], field, new Array());
+                            this.tests[i].tearDown();
+                            this.testStatuses[i].setSuccess(true);
+                        } catch (e : AssertionError) {
+                            this.testStatuses[i].setError(e.getMessage());
+                            this.testStatuses[i].setBackTrace(Stack.toString(Stack.exceptionStack()));
+                            this.testStatuses[i].setSuccess(false);
                         } catch (e : Dynamic) {
                             // Test fails if there's an error to catch
                             #if js
                             if(e.message != null) {
-                                testStatus.setError("Exception thrown : " + e + " [" + e.message + "]");
+                                this.testStatuses[i].setError("Exception thrown : " + e + " [" + e.message + "]");
                             } else {
-                                testStatus.setError("Exception thrown : " + e);
+                                this.testStatuses[i].setError("Exception thrown : " + e);
                             }
                             #else
-                            testStatus.setError("Exception thrown : " + e);
+                            this.testStatuses[i].setError("Exception thrown : " + e);
                             #end
-                            testStatus.setBackTrace(Stack.toString(Stack.exceptionStack()));
+                            this.testStatuses[i].setBackTrace(Stack.toString(Stack.exceptionStack()));
+                            this.testStatuses[i].setSuccess(false);
                         }
 
-                        currentTest.tearDown();
-                        this.success = currentTest.getStatus().isSuccess();
+                        this.testStatuses[i].setDone(true);
+                        this.success = this.testStatuses[i].isSuccess();
                     }
                 }
             }
+
+            i++;
         }
     }
 
     /**
      * Returns the tests that were added to this test runner
      */
-    public function getTests() : List<TestCase> {
+    public function getTests() : Array<TestCase> {
         return this.tests;
+    }
+
+    /**
+     * Returns the tests' statuses. The indexes of the statuses corresponds
+     * to the indexes of the tests.
+     */
+    public function getTestStatuses() : Array<TestStatus> {
+        return this.testStatuses;
     }
 
     public function iterator() : Iterator<TestCase> {
