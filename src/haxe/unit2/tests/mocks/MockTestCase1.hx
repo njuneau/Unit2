@@ -88,6 +88,37 @@ class MockTestCase1 extends TestCase {
         this.assertTrue(true);
         this.assertTrue(3 > 1);
         this.assertFalse(1 > 3);
+
+        var caught : Bool = false;
+
+        try {
+            this.assertEquals(1, 2);
+        } catch (e : AssertionException) {
+            caught = true;
+        }
+
+        this.assertTrue(caught);
+
+        caught = false;
+
+        try {
+            this.assertFalse(true);
+        } catch(e : AssertionException) {
+            caught = true;
+        }
+
+        this.assertTrue(caught);
+
+        caught = false;
+
+        try {
+            this.assertTrue(false);
+        } catch(e : AssertionException) {
+            caught = true;
+        }
+
+        this.assertTrue(caught);
+
         this.testCount++;
     }
 
