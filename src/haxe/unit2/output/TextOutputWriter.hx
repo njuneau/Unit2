@@ -1,3 +1,28 @@
+/*
+ * Copyright (c) 2012, Nicolas Juneau
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *  - Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *  - Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
 package haxe.unit2.output;
 
 import haxe.unit2.TestCase;
@@ -34,7 +59,7 @@ class TextOutputWriter implements OutputWriter {
      * This will write the results of the test runner's test cases in a simple
      * text representation
      */
-    public function writeResults( testRunner : TestRunner ) : String {
+    public function writeResults(testRunner : TestRunner) : String {
         var output : StringBuf = new StringBuf();
         var total : Int = testRunner.getTests().length;
         var succeeded : Int = 0;
@@ -84,6 +109,7 @@ class TextOutputWriter implements OutputWriter {
                 unfinished++;
             }
 
+            // Add test status and error to output
             output.add(testStatusString);
             output.add(testErrorString);
             output.add("\r\n");
@@ -92,6 +118,7 @@ class TextOutputWriter implements OutputWriter {
             i++;
         }
 
+        // Write totals
         output.add(H2_LINE);
         output.add(TOTAL);
         output.add("\t\t");

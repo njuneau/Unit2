@@ -22,21 +22,33 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  */
-
 package haxe.unit2;
 
+/**
+ * Describes a test case's result
+ */
 class TestResult {
 
     private var m_tests : List<TestStatus>;
 
-	public function new() {
-		this.m_tests = new List();
-	}
+    /**
+    * Create a new test result
+    */
+    public function new() {
+        this.m_tests = new List();
+    }
 
-	public function add(t : TestStatus) : Void {
-		this.m_tests.add(t);
-	}
+    /**
+     * Add a test status to the results
+     */
+    public function add(t : TestStatus) : Void {
+        this.m_tests.add(t);
+    }
 
+    /**
+     * Indicates if the test case is succeeding by checking if all tests
+     * statuses reports success.
+     */
     public function isSuccess() : Bool {
         var testIterator : Iterator<TestStatus> = this.m_tests.iterator();
         var success : Bool = true;
