@@ -1,16 +1,16 @@
-HaXe Unit2 Test framework
+haXe Unit2 Test framework
 ===============
 
 Description
 -----------------
 
 This is a modification of haXe's unit testing framework. Unit2 makes use of
-class metadata_ in its test runners instead on relying on method names in order
+class metadata_ in its test runners instead of relying on method names in order
 to detect test methods.
 
 Unit2 also redefines how the test results are written out. Unit2 makes use of
 "output writers" that lets the user easily implement his own way of outputting
-its test results. For example, one might define an output writer that writes
+the test results. For example, one might define an output writer that writes
 HTML instead of plain text.
 
 The assertion mechanism has also changed. Unit2 lets the TestRunner manage
@@ -41,7 +41,7 @@ method you want executed by the test runner as a test case. You can also
 redefine the "prepare", "setup" and "tearDown" methods, which are called by the
 TestRunner at specific times (refer to the method documentation).
 
-Once your test case is ready, create a new ``TestRunner`` instance and include
+Once your test case is ready, create a new ``TestRunner`` instance and
 add an instance of your test case class into it. Once you added all your test
 cases, run the test runner.
 
