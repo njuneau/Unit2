@@ -36,53 +36,57 @@ class MockTestCase1 extends TestCase {
     // The number of tests to run in this class. KEEP THIS UP TO DATE!
     public static var TEST_COUNT : Int = 2;
 
-    private var setupCount : Int;
-    private var tearDownCount : Int;
-    private var ranFakeTest : Bool;
-    private var testCount : Int;
-
-    /**
-     * Empty constructor
-     */
-    public function new() {
-        super();
-    }
-
-    /**
-     * Reset all values at each run.
-     */
-    public override function prepare() : Void {
-        this.testCount = 0;
-        this.setupCount = 0;
-        this.tearDownCount = 0;
-        this.ranFakeTest = false;
-        super.prepare();
-    }
-
-    /**
-     * Increases setup counts
-     */
-    public override function setup() : Void {
-        this.setupCount++;
-    }
-
-    /**
-     * Increases teardown counts
-     */
-    public override function tearDown() : Void {
-        this.tearDownCount++;
-    }
+    private static var beforeCount : Int = 0;
+    private static var afterCount : Int = 0;
+    private static var ranFakeTest : Bool = false;
+    private static var testCount : Int = 0;
+    private static var beforeClassCount : Int = 0;
+    private static var afterClassCount : Int = 0;
 
     /**************************************************************************/
     /*                               TESTING AREA                             */
     /**************************************************************************/
 
     /**
+     * Reset all values at each run.
+     */
+    @BeforeClass
+    public function beforeClass() : Void {
+        testCount = 0;
+        beforeCount = 0;
+        afterCount = 0;
+        ranFakeTest = false;
+
+        beforeClassCount++;
+    }
+
+    @AfterClass
+    public function afterClass() : Void {
+        afterClassCount++;
+    }
+
+    /**
+     * Increases before counts
+     */
+    @Before
+    public function before() : Void {
+        beforeCount++;
+    }
+
+    /**
+     * Increases after counts
+     */
+    @After
+    public function after() : Void {
+        afterCount++;
+    }
+
+    /**
      * This is not a test. If the TestCase interprets this as a test case,
      * then the TestCase implementation is not working properly.
      */
     public function testFakeTest() {
-        this.ranFakeTest = true;
+        ranFakeTest = true;
     }
 
     /**
@@ -91,7 +95,7 @@ class MockTestCase1 extends TestCase {
      */
     @NotATest
     public function testAnotherFakeTest() {
-        this.ranFakeTest = true;
+        ranFakeTest = true;
     }
 
     /**
@@ -99,7 +103,7 @@ class MockTestCase1 extends TestCase {
      */
     @Test
     public function emptyTest() : Void {
-        this.testCount++;
+        testCount++;
     }
 
     /**
@@ -144,7 +148,7 @@ class MockTestCase1 extends TestCase {
 
         this.assertTrue(caught);
 
-        this.testCount++;
+        testCount++;
     }
 
     /**************************************************************************/
@@ -152,33 +156,57 @@ class MockTestCase1 extends TestCase {
     /**************************************************************************/
 
     /**
+     * Reset the mock
+     */
+    public static function reset() {
+        beforeClassCount = 0;
+        afterClassCount = 0;
+    }
+
+    /**
      * Indicates if the "fake test" was run. If it did, then the test case class
      * is not functionning properly.
      */
-    public function isFakeTestRan() : Bool {
-        return this.ranFakeTest;
+    public static function isFakeTestRan() : Bool {
+        return ranFakeTest;
     }
 
     /**
-     * Indicates the number of times "setup" has been called, should be the same
-     * number has the amount of tests in the test case.
+     * Indicates the number of times the "before test" has been called, should
+     * be the same number as the amount of tests in the test case for this mock.
      */
-    public function getSetupCount() : Int {
-        return this.setupCount;
+    public static function getBeforeCount() : Int {
+        return beforeCount;
     }
 
     /**
-     * Indicates the number of times "tearDown" has been called, should be the
-     * same number has the amount of tests in the test case.
+     * Indicates the number of times the "after test" has been called, should be
+     * the same number as the amount of tests in the test case for this mock.
      */
-    public function getTearDownCount() : Int {
-        return this.tearDownCount;
+    public static function getAfterCount() : Int {
+        return afterCount;
     }
 
     /**
      * Indicates the number of tests that were ran.
      */
-    public function getTestCount() : Int {
-        return this.testCount;
+    public static function getTestCount() : Int {
+        return testCount;
+    }
+
+    /**
+     * Returns the amount of times the "before class" has been called. Should be
+     * 1.
+     */
+    public static function getBeforeClassCount() : Int {
+        return beforeClassCount;
+    }
+
+    /**
+     * Returns the amount of times the "after class" has been called. Should be
+     * 1.
+     */
+    public static function getAfterClassCount() : Int {
+        return afterClassCount;
     }
 }

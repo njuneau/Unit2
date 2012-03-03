@@ -43,9 +43,9 @@ class TextOutputWriterTest extends TestCase {
         var successPattern : String = "[ OK ]";
         var failPattern : String = "[ FAIL ]";
         var dnrPattern : String = "[ DID NOT RUN ]";
-        var tests : List<haxe.unit2.TestCase> = new List<haxe.unit2.TestCase>();
-        tests.add(new MockTestCase1());
-        tests.add(new MockTestCase1());
+        var tests : List<Class<haxe.unit2.TestCase>> = new List<Class<haxe.unit2.TestCase>>();
+        tests.add(MockTestCase1);
+        tests.add(MockTestCase1);
 
         // Add all tests in test runner
         for(test in tests) {

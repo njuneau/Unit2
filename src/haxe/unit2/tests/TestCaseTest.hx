@@ -38,15 +38,18 @@ class TestCaseTest extends TestCase {
      * Tests the mock test case number 1
      */
     public function testMockTestCase1() :Void {
-        var mock : MockTestCase1 = new MockTestCase1();
         var testRunner : TestRunner = new TestRunner();
-        testRunner.add(mock);
+        testRunner.add(MockTestCase1);
         testRunner.run();
 
-        this.assertEquals(mock.getSetupCount(), MockTestCase1.TEST_COUNT);
-        this.assertEquals(mock.getTearDownCount(), MockTestCase1.TEST_COUNT);
-        this.assertEquals(mock.getTestCount(), MockTestCase1.TEST_COUNT);
-        this.assertFalse(mock.isFakeTestRan());
+        this.assertEquals(MockTestCase1.getBeforeCount(), MockTestCase1.TEST_COUNT);
+        this.assertEquals(MockTestCase1.getAfterCount(), MockTestCase1.TEST_COUNT);
+        this.assertEquals(MockTestCase1.getTestCount(), MockTestCase1.TEST_COUNT);
+        this.assertFalse(MockTestCase1.isFakeTestRan());
+        this.assertEquals(MockTestCase1.getBeforeClassCount(), 1);
+        this.assertEquals(MockTestCase1.getAfterClassCount(), 1);
+
+        MockTestCase1.reset();
     }
 
 }

@@ -31,36 +31,21 @@ import haxe.Stack;
  * A test case consists of a set of unit tests related to a certain code
  * component.
  *
- * In order to write unit tests, write methods annotated with the @Test
+ * In order to write unit tests, write methods annotated with the "@Test"
  * metadata element. Each test test will be executed sequentially. Before
- * the execution of a unit test, the "setup" method will be called and after the
- * execution of each test, the "tearDown" method will be called. You will have
- * to override these methods in your own TestCase implementation, should you
- * need them.
+ * the execution of a unit test.
+ *
+ * There also may be one method annotated "@Before" - it will be executed before
+ * each test method. The "@After" tag may also be used in the same fashion - the
+ * method will then be executed after the test case.
+ *
+ * For test case initialisation and termination, "@BeforeClass" and
+ * "@AfterClass" may be used on methods to have them exectuted, respectively,
+ * before all the tests are ran and after all the tests are ran. There can only
+ * be one "@BeforeClass" and one "@AfterClass"-annotated method.
+ *
  */
 class TestCase {
-
-    /**
-     * Default empty constructor
-     */
-    public function new() {}
-
-    /**
-     * This method is called before a TestRunner starts executing tests on this
-     * instance. It is not called each time a test is ran - it is ran once per
-     * TestCase instance.
-     */
-    public function prepare() : Void {}
-
-    /**
-     * This method is called before each test is ran
-     */
-    public function setup() : Void {}
-
-    /**
-     * This method is called after each test is ran
-     */
-    public function tearDown() : Void {}
 
     /**
      * Asserts that the given value is true. If it is not true, an error will be thrown.

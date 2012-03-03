@@ -76,13 +76,13 @@ class TextOutputWriter implements OutputWriter {
         // Loop through all the flags
         output.add(H2_LINE);
 
-        var tests : Array<TestCase> = testRunner.getTests();
+        var tests : Array<Class<TestCase>> = testRunner.getTests();
         var statuses : Array<TestStatus> = testRunner.getTestStatuses();
 
         var i : Int = 0;
         while(i < tests.length) {
 
-            output.add(Type.getClassName(Type.getClass(tests[i])));
+            output.add(Type.getClassName(tests[i]));
             output.add("\t");
 
             var testStatusString : String;

@@ -6,7 +6,7 @@ Description
 
 This is a modification of haXe's unit testing framework. Unit2 makes use of
 class metadata_ in its test runners instead of relying on method names in order
-to detect test methods.
+to detect test methods. It is inspired by JUnit_'s way of working.
 
 Unit2 also redefines how the test results are written out. Unit2 makes use of
 "output writers" that lets the user easily implement his own way of outputting
@@ -24,7 +24,7 @@ How to use
 Package inclusion
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The core framework is located inside the ``haxe.unit2 package``. The
+The core framework is located inside the ``haxe.unit2`` package. The
 ``haxe.unit2.tests`` sub-package only contains the framework's test suite
 (which is written using the original haXe unit testing packages). The ``tests``
 sub-package is purely optional for running tests using Unit2.
@@ -37,12 +37,18 @@ Writing a simple test suite
 
 Start by creating a class that extends ``haxe.unit2.TestCase``. This class will
 hold your test case's unit tests. Add the ``@Test`` metadata tag to every
-method you want executed by the test runner as a test case. You can also
-redefine the "prepare", "setup" and "tearDown" methods, which are called by the
-TestRunner at specific times (refer to the method documentation).
+method you want executed by the test runner as a test.
+
+You may also use the ``@Before`` and ``@After`` tags to annotate methods that
+will be executed, respectively, before and after each test method. The can only
+be one of each.
+
+You may also use the ``@BeforeClass`` and ``@AfterClass`` tags to annotate
+methods that will be executed, respectively, before and after all the tests
+methods are ran (in a constructor/destructor fashion).
 
 Once your test case is ready, create a new ``TestRunner`` instance and
-add an instance of your test case class into it. Once you added all your test
+add your test case class into it. Once you added all your test
 cases, run the test runner.
 
 Once the test runner has finished running, you can use an ``OutputWriter`` to
@@ -53,17 +59,5 @@ a text formatted test report. You are free to output that string in the way you
 want. For example, you can print it in the console, trace it or even display a
 Web page with the results in it.
 
-Future work
------------------
-
-As of now, only test methods are detected with metadata tags. In future
-versions, tags could also be used to detect the ``prepare``, ``setup`` and
-``tearDown`` methods. This way, the user could choose how to name them.
-
-Also, the default ``TestRunner`` requires the user to call his test case's
-constructors in order to add them to the ``TestRunner``. The ``TestRunner``
-could take care of the construction, which would allow it to detect errors at
-construction.
-
-
 .. _metadata: http://haxe.org/manual/metadata
+.. _JUnit: http://junit.sourceforge.net/
