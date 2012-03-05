@@ -182,6 +182,9 @@ class TestRunner {
         return this.testStatuses;
     }
 
+    /**
+     * Returns an iterator that iterates on the test runner's list of test cases
+     */
     public function iterator() : Iterator<Class<TestCase>> {
         return this.tests.iterator();
     }

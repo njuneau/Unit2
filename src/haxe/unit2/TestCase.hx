@@ -32,12 +32,11 @@ import haxe.Stack;
  * component.
  *
  * In order to write unit tests, write methods annotated with the "@Test"
- * metadata element. Each test test will be executed sequentially. Before
- * the execution of a unit test.
+ * metadata element. Each test test will be executed sequentially.
  *
  * There also may be one method annotated "@Before" - it will be executed before
  * each test method. The "@After" tag may also be used in the same fashion - the
- * method will then be executed after the test case.
+ * method will then be executed after the test method.
  *
  * For test case initialisation and termination, "@BeforeClass" and
  * "@AfterClass" may be used on methods to have them exectuted, respectively,
@@ -66,7 +65,7 @@ class TestCase {
     }
 
     /**
-     * Asserts that two given objects are equal. If they are not, an thrown will be thrown
+     * Asserts that two given objects are equal. If they are not, an error will be thrown
      */
     private function assertEquals<T>(expected : T, actual : T, ?c : PosInfos) : Void {
         if (actual != expected) {
