@@ -69,12 +69,16 @@ class TextOutputWriterTest extends TestCase {
         i = 0;
         result = outputWriter.writeResults(testRunner);
         lastPos = 0;
+        var okNum : Int = 0;
 
-        while(i < tests.length) {
+        while(i < tests.length && lastPos != -1) {
             lastPos = result.indexOf(successPattern, lastPos);
-            //this.assertTrue(lastPos != -1);
+            if(lastPos != -1) {
+                okNum++;
+            }
             i++;
         }
+        this.assertEquals(tests.length, okNum);
 
         Lib.println(result);
 
