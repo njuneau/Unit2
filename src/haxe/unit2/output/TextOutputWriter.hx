@@ -39,16 +39,16 @@ import Type;
  */
 class TextOutputWriter implements OutputWriter {
 
-    private static var H1_LINE : String = "================================================================================\r\n";
-    private static var H2_LINE : String = "--------------------------------------------------------------------------------\r\n";
-    private static var STATUS_OK : String = "[ OK ]";
-    private static var STATUS_FAIL : String = "[ FAIL ]";
-    private static var STATUS_DNR : String = "[ DID NOT RUN ]";
+    private static inline var H1_LINE : String = "================================================================================\r\n";
+    private static inline var H2_LINE : String = "--------------------------------------------------------------------------------\r\n";
+    private static inline var STATUS_OK : String = "[ OK ]";
+    private static inline var STATUS_FAIL : String = "[ FAIL ]";
+    private static inline var STATUS_DNR : String = "[ DID NOT RUN ]";
 
-    private static var TOTAL : String = "Total";
-    private static var TOTAL_SUCCEEDED : String = "Succeeded";
-    private static var TOTAL_FAILED : String = "Failed";
-    private static var TOTAL_DNR : String = "Did not run";
+    private static inline var TOTAL : String = "Total";
+    private static inline var TOTAL_SUCCEEDED : String = "Succeeded";
+    private static inline var TOTAL_FAILED : String = "Failed";
+    private static inline var TOTAL_DNR : String = "Did not run";
 
     /**
      * Default constructor
