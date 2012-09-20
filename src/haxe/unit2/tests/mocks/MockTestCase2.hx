@@ -23,26 +23,21 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package haxe.unit2.tests;
+package haxe.unit2.tests.mocks;
 
-import haxe.unit.TestRunner;
+import haxe.unit2.TestCase;
 
 /**
- * Unit2 Test launcher
+ * This mock fails.
  */
-class TestMain {
-
-    public function new() {}
+class MockTestCase2 extends TestCase {
 
     /**
-     * Application entry point
+     * A test case that will not succeed
      */
-    public static function main() : Void {
-        var testRunner : TestRunner = new TestRunner();
-        testRunner.add(new TestCaseTest());
-        testRunner.add(new TextOutputWriterTest());
-        testRunner.add(new XHTMLOutputWriterTest());
-        testRunner.run();
+    @Test
+    public function testFail() : Void {
+        this.assertFalse(true);
     }
 
 }

@@ -32,8 +32,8 @@ package haxe.unit2.output;
 class XHTMLOutputWriter implements OutputWriter {
 
     // Messages
-    private static inline var STATUS_OK : String = "OK";
-    private static inline var STATUS_FAIL : String = "Fail";
+    private static inline var STATUS_OK : String = "Succeeded";
+    private static inline var STATUS_FAIL : String = "Failed";
     private static inline var STATUS_DNR : String = "Did not run";
 
     // HTML classes
@@ -45,6 +45,9 @@ class XHTMLOutputWriter implements OutputWriter {
     private static inline var TEST_RESULT_CLASS : String = "testResult";
     private static inline var TEST_METRICS_STATUS_CLASS : String = "testMetricsStatus";
     private static inline var TEST_METRICS_TOTAL_CLASS : String = "testMetricsTotal";
+
+    // Prefixes
+    private static inline var TEST_ID_PREFIX : String = "test_";
 
     /**
      * Default constructor
@@ -113,6 +116,7 @@ class XHTMLOutputWriter implements OutputWriter {
         var failed : Int = 0;
         var unfinished : Int = 0;
 
+        // Loop through all the tests
         var i : Int = 0;
         while(i < tests.length) {
 
@@ -120,6 +124,7 @@ class XHTMLOutputWriter implements OutputWriter {
             var testTitleCell : Xml = Xml.createElement("td");
             testTitleCell.set("class", TEST_TITLE_CLASS);
             testTitleCell.addChild(Xml.createPCData(Type.getClassName(tests[i])));
+            testTR.set("id", TEST_ID_PREFIX + i);
             testTR.addChild(testTitleCell);
 
             var testResultCell : Xml = Xml.createElement("td");
@@ -208,7 +213,7 @@ class XHTMLOutputWriter implements OutputWriter {
         var succeededTR : Xml = Xml.createElement("tr");
         var succeededStatusCell : Xml = Xml.createElement("td");
         succeededStatusCell.set("class", TEST_METRICS_STATUS_CLASS);
-        succeededStatusCell.addChild(Xml.createPCData("Succeeded"));
+        succeededStatusCell.addChild(Xml.createPCData(STATUS_OK));
         succeededTR.addChild(succeededStatusCell);
         var succeededTotalCell : Xml = Xml.createElement("td");
         succeededTotalCell.set("class", TEST_METRICS_TOTAL_CLASS);
@@ -220,7 +225,7 @@ class XHTMLOutputWriter implements OutputWriter {
         var failedTR : Xml = Xml.createElement("tr");
         var failedStatusCell : Xml = Xml.createElement("td");
         failedStatusCell.set("class", TEST_METRICS_STATUS_CLASS);
-        failedStatusCell.addChild(Xml.createPCData("Failed"));
+        failedStatusCell.addChild(Xml.createPCData(STATUS_FAIL));
         failedTR.addChild(failedStatusCell);
         var failedTotalCell : Xml = Xml.createElement("td");
         failedTotalCell.set("class", TEST_METRICS_TOTAL_CLASS);
@@ -232,7 +237,7 @@ class XHTMLOutputWriter implements OutputWriter {
         var dnrTR : Xml = Xml.createElement("tr");
         var dnrStatusCell : Xml = Xml.createElement("td");
         dnrStatusCell.set("class", TEST_METRICS_STATUS_CLASS);
-        dnrStatusCell.addChild(Xml.createPCData("Did not run"));
+        dnrStatusCell.addChild(Xml.createPCData(STATUS_DNR));
         dnrTR.addChild(dnrStatusCell);
         var dnrTotalCell : Xml = Xml.createElement("td");
         dnrTotalCell.set("class", TEST_METRICS_TOTAL_CLASS);
@@ -255,7 +260,7 @@ class XHTMLOutputWriter implements OutputWriter {
         testTable.addChild(testTableFooter);
 
         body.addChild(testTable);
-        document.addChild(body);
+        html.addChild(body);
 
         return document.toString();
     }
