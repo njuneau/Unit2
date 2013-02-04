@@ -28,6 +28,7 @@ package haxe.unit2.tests;
 import haxe.unit.TestCase;
 import haxe.unit2.TestRunner;
 import haxe.unit2.tests.mocks.MockTestCase1;
+import haxe.unit2.tests.mocks.MockTestCase2;
 import haxe.unit2.output.TextOutputWriter;
 
 import neko.Lib;
@@ -40,11 +41,14 @@ class TextOutputWriterTest extends TestCase {
     public function testTextOutputWriter() : Void {
         var testRunner : TestRunner = new TestRunner();
         var outputWriter : TextOutputWriter = new TextOutputWriter();
+        var testCase1Pattern : String = "haxe.unit2.tests.mocks.MockTestCase1";
+        var testCase2Pattern : String = "haxe.unit2.tests.mocks.MockTestCase2";
         var successPattern : String = "[ OK ]";
         var failPattern : String = "[ FAIL ]";
         var dnrPattern : String = "[ DID NOT RUN ]";
         var tests : List<Class<haxe.unit2.TestCase>> = new List<Class<haxe.unit2.TestCase>>();
         tests.add(MockTestCase1);
+        tests.add(MockTestCase2);
         tests.add(MockTestCase1);
 
         // Add all tests in test runner
@@ -55,33 +59,51 @@ class TextOutputWriterTest extends TestCase {
         // After running the outputwriter, we should see all the tests as not
         // finished
         var result : String = outputWriter.writeResults(testRunner);
-        var i : Int = 0;
-        var lastPos :Int = 0;
+        var lines : Array<String> = result.split("\r\n");
 
-        while(i < tests.length) {
-            lastPos = result.indexOf(dnrPattern, lastPos);
-            this.assertTrue(lastPos != -1);
-            i++;
-        }
+        assertEquals(lines[4].indexOf(testCase1Pattern), 0);
+        assertEquals(lines[4].lastIndexOf(dnrPattern), testCase1Pattern.length + 1);
+        assertEquals(lines[6].indexOf(testCase2Pattern), 0);
+        assertEquals(lines[6].lastIndexOf(dnrPattern), testCase2Pattern.length + 1);
+        assertEquals(lines[8].indexOf(testCase1Pattern), 0);
+        assertEquals(lines[8].lastIndexOf(dnrPattern), testCase1Pattern.length + 1);
 
-        // Now that the test runner has ran, all the tests should mark OK.
+        assertEquals(lines[11].indexOf("Total"), 0);
+        assertEquals(lines[11].lastIndexOf("3"), lines[11].length - 1);
+        assertEquals(lines[12].indexOf("Succeeded"), 0);
+        assertEquals(lines[12].lastIndexOf("0"), lines[12].length - 1);
+        assertEquals(lines[13].indexOf("Failed"), 0);
+        assertEquals(lines[13].lastIndexOf("0"), lines[13].length - 1);
+        assertEquals(lines[14].indexOf("Did not run"), 0);
+        assertEquals(lines[14].lastIndexOf("3"), lines[14].length - 1);
+
         testRunner.run();
-        i = 0;
+
+        // After running the tests and the output writer, we should see all the
+        // following results
         result = outputWriter.writeResults(testRunner);
-        lastPos = 0;
-        var okNum : Int = 0;
+        lines = result.split("\r\n");
 
-        while(i < tests.length && lastPos != -1) {
-            lastPos = result.indexOf(successPattern, lastPos);
-            if(lastPos != -1) {
-                okNum++;
-            }
-            i++;
-        }
-        this.assertEquals(tests.length, okNum);
+        assertEquals(lines[4].indexOf(testCase1Pattern), 0);
+        assertEquals(lines[4].lastIndexOf(successPattern), testCase1Pattern.length + 1);
+        assertEquals(lines[6].indexOf(testCase2Pattern), 0);
+        assertEquals(lines[6].lastIndexOf(failPattern), testCase2Pattern.length + 1);
+        assertEquals(lines[10].indexOf(testCase1Pattern), 0);
+        assertEquals(lines[10].lastIndexOf(dnrPattern), testCase1Pattern.length + 1);
 
-        Lib.println(result);
+        // Exception should be there at line 7 and stack trace after it
+        assertEquals(lines[7].indexOf("Caught exception : \t"), 0);
+        assertTrue(lines[7].length > "Caught exception : \t".length);
+        assertEquals(lines[8].indexOf("Called"), 1);
 
+        assertEquals(lines[13].indexOf("Total"), 0);
+        assertEquals(lines[13].lastIndexOf("3"), lines[13].length - 1);
+        assertEquals(lines[14].indexOf("Succeeded"), 0);
+        assertEquals(lines[14].lastIndexOf("1"), lines[14].length - 1);
+        assertEquals(lines[15].indexOf("Failed"), 0);
+        assertEquals(lines[15].lastIndexOf("1"), lines[15].length - 1);
+        assertEquals(lines[16].indexOf("Did not run"), 0);
+        assertEquals(lines[16].lastIndexOf("1"), lines[16].length - 1);
     }
 
 }
