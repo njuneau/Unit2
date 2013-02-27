@@ -111,7 +111,7 @@ class TextOutputWriter implements OutputWriter {
 
             // Add test status and error to output
             output.add(testStatusString);
-            output.add(testErrorString);
+            output.add(testErrorString.toString());
             output.add("\r\n");
             output.add(H2_LINE);
 

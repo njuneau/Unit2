@@ -25,7 +25,7 @@
 package haxe.unit2;
 
 import haxe.PosInfos;
-import haxe.Stack;
+import haxe.CallStack;
 
 /**
  * A test case consists of a set of unit tests related to a certain code

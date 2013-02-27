@@ -131,7 +131,7 @@ class TestRunner {
 
                 } catch (e : AssertionException) {
                     this.testStatuses[i].setError(e.getMessage());
-                    this.testStatuses[i].setBackTrace(Stack.toString(Stack.exceptionStack()));
+                    this.testStatuses[i].setBackTrace(CallStack.toString(CallStack.exceptionStack()));
                     this.testStatuses[i].setSuccess(false);
                 } catch (e : Dynamic) {
                     // Test fails if there's an error to catch
@@ -145,7 +145,7 @@ class TestRunner {
                     this.testStatuses[i].setError(e);
                     #end
 
-                    this.testStatuses[i].setBackTrace(Stack.toString(Stack.exceptionStack()));
+                    this.testStatuses[i].setBackTrace(CallStack.toString(CallStack.exceptionStack()));
                     this.testStatuses[i].setSuccess(false);
                 }
 
