@@ -22,8 +22,9 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  */
-package haxe.unit2;
+package unit2;
 
+import haxe.CallStack;
 import haxe.rtti.Meta;
 
 /**

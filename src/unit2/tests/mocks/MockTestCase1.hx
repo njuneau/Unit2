@@ -23,9 +23,9 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package haxe.unit2.tests.mocks;
+package unit2.tests.mocks;
 
-import haxe.unit2.TestCase;
+import unit2.TestCase;
 
 /**
  * This is a mock test case that tests the various functions of the TestCase class

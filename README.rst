@@ -24,18 +24,18 @@ How to use
 Package inclusion
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The core framework is located inside the ``haxe.unit2`` package. The
-``haxe.unit2.tests`` sub-package only contains the framework's test suite
+The core framework is located inside the ``unit2`` package. The
+``unit2.tests`` sub-package only contains the framework's test suite
 (which is written using the original Haxe unit testing packages). The ``tests``
 sub-package is purely optional for running tests using Unit2.
 
-By including the ``haxe.unit2`` package in your projects, you'll be able to use
+By including the ``unit2`` package in your projects, you'll be able to use
 Unit2.
 
 Writing a simple test suite
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Start by creating a class that extends ``haxe.unit2.TestCase``. This class will
+Start by creating a class that extends ``unit2.TestCase``. This class will
 hold your test case's unit tests. Add the ``@Test`` metadata tag to every
 method you want executed by the test runner as a test.
 
@@ -53,7 +53,7 @@ cases, run the test runner.
 
 Once the test runner has finished running, you can use an ``OutputWriter`` to
 view the results. Unit2 ships with a default text-based ``OutputWriter``. Create
-a ``haxe.unit2.output.TextOutputWriter`` instance and execute the
+a ``unit2.output.TextOutputWriter`` instance and execute the
 ``writeResults`` method with your test runner as a parameter. This will return
 a text formatted test report. You are free to output that string in the way you
 want. For example, you can print it in the console, trace it or even display a

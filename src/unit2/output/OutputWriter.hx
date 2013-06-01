@@ -23,26 +23,20 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package haxe.unit2.tests;
+package unit2.output;
 
-import haxe.unit.TestRunner;
+import unit2.TestCase;
+import unit2.TestRunner;
 
 /**
- * Unit2 Test launcher
+ * An output writer is used to format and output the results of a test suite
+ * in a standardised manner.
  */
-class TestMain {
-
-    public function new() {}
+interface OutputWriter {
 
     /**
-     * Application entry point
+     * Write the results of a test suite
      */
-    public static function main() : Void {
-        var testRunner : TestRunner = new TestRunner();
-        testRunner.add(new TestCaseTest());
-        testRunner.add(new TextOutputWriterTest());
-        testRunner.add(new XHTMLOutputWriterTest());
-        testRunner.run();
-    }
+    public function writeResults(testRunner : TestRunner) : String;
 
 }

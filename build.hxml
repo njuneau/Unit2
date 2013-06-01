@@ -18,4 +18,4 @@
 # C++ target
 # -cpp out
 
--main haxe.unit2.tests.TestMain
+-main unit2.tests.TestMain

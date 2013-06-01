@@ -23,11 +23,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package haxe.unit2.output;
+package unit2.output;
 
-import haxe.unit2.TestCase;
-import haxe.unit2.TestRunner;
-import haxe.unit2.TestStatus;
+import unit2.TestCase;
+import unit2.TestRunner;
+import unit2.TestStatus;
 
 import StringTools;
 import Date;

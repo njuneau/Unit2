@@ -23,11 +23,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package haxe.unit2.tests;
+package unit2.tests;
 
 import haxe.unit.TestCase;
-import haxe.unit2.TestRunner;
-import haxe.unit2.tests.mocks.MockTestCase1;
+import unit2.TestRunner;
+import unit2.tests.mocks.MockTestCase1;
 
 /**
  * Unit test that tests the test case class

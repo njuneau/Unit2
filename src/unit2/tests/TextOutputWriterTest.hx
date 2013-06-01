@@ -23,13 +23,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package haxe.unit2.tests;
+package unit2.tests;
 
 import haxe.unit.TestCase;
-import haxe.unit2.TestRunner;
-import haxe.unit2.tests.mocks.MockTestCase1;
-import haxe.unit2.tests.mocks.MockTestCase2;
-import haxe.unit2.output.TextOutputWriter;
+import unit2.TestRunner;
+import unit2.tests.mocks.MockTestCase1;
+import unit2.tests.mocks.MockTestCase2;
+import unit2.output.TextOutputWriter;
 
 import neko.Lib;
 
@@ -41,12 +41,12 @@ class TextOutputWriterTest extends TestCase {
     public function testTextOutputWriter() : Void {
         var testRunner : TestRunner = new TestRunner();
         var outputWriter : TextOutputWriter = new TextOutputWriter();
-        var testCase1Pattern : String = "haxe.unit2.tests.mocks.MockTestCase1";
-        var testCase2Pattern : String = "haxe.unit2.tests.mocks.MockTestCase2";
+        var testCase1Pattern : String = "unit2.tests.mocks.MockTestCase1";
+        var testCase2Pattern : String = "unit2.tests.mocks.MockTestCase2";
         var successPattern : String = "[ OK ]";
         var failPattern : String = "[ FAIL ]";
         var dnrPattern : String = "[ DID NOT RUN ]";
-        var tests : List<Class<haxe.unit2.TestCase>> = new List<Class<haxe.unit2.TestCase>>();
+        var tests : List<Class<unit2.TestCase>> = new List<Class<unit2.TestCase>>();
         tests.add(MockTestCase1);
         tests.add(MockTestCase2);
         tests.add(MockTestCase1);

@@ -23,13 +23,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package haxe.unit2.tests;
+package unit2.tests;
 
 import haxe.unit.TestCase;
-import haxe.unit2.TestRunner;
-import haxe.unit2.tests.mocks.MockTestCase1;
-import haxe.unit2.tests.mocks.MockTestCase2;
-import haxe.unit2.output.XHTMLOutputWriter;
+import unit2.TestRunner;
+import unit2.tests.mocks.MockTestCase1;
+import unit2.tests.mocks.MockTestCase2;
+import unit2.output.XHTMLOutputWriter;
 
 import neko.Lib;
 
@@ -55,7 +55,7 @@ class XHTMLOutputWriterTest extends TestCase {
         var testRunner : TestRunner = new TestRunner();
         var outputWriter : XHTMLOutputWriter = new XHTMLOutputWriter();
 
-        var tests : List<Class<haxe.unit2.TestCase>> = new List<Class<haxe.unit2.TestCase>>();
+        var tests : List<Class<unit2.TestCase>> = new List<Class<unit2.TestCase>>();
         tests.add(MockTestCase1);
         tests.add(MockTestCase2);
 
@@ -83,9 +83,9 @@ class XHTMLOutputWriterTest extends TestCase {
         var testTable : Xml = body.elementsNamed("table").next();
 
         // Loop through all the tests, verify validity of information (should be all "did not run")
-        var testIterator : Iterator<Class<haxe.unit2.TestCase>> = tests.iterator();
+        var testIterator : Iterator<Class<unit2.TestCase>> = tests.iterator();
         for(testTR in testTable.elementsNamed("tbody").next().elementsNamed("tr")) {
-            var currentTest : Class<haxe.unit2.TestCase> = testIterator.next();
+            var currentTest : Class<unit2.TestCase> = testIterator.next();
             var testStatus : String = testTR.get("class");
             this.assertEquals(testStatus, STATUS_DNR_CLASS);
 
@@ -135,7 +135,7 @@ class XHTMLOutputWriterTest extends TestCase {
         var testRunner : TestRunner = new TestRunner();
         var outputWriter : XHTMLOutputWriter = new XHTMLOutputWriter();
 
-        var tests : List<Class<haxe.unit2.TestCase>> = new List<Class<haxe.unit2.TestCase>>();
+        var tests : List<Class<unit2.TestCase>> = new List<Class<unit2.TestCase>>();
         tests.add(MockTestCase1);
         tests.add(MockTestCase2);
 
@@ -169,9 +169,9 @@ class XHTMLOutputWriterTest extends TestCase {
         var failures : Int = 0;
         var noRuns : Int = 0;
 
-        var testIterator : Iterator<Class<haxe.unit2.TestCase>> = tests.iterator();
+        var testIterator : Iterator<Class<unit2.TestCase>> = tests.iterator();
         for(testTR in testTable.elementsNamed("tbody").next().elementsNamed("tr")) {
-            var currentTest : Class<haxe.unit2.TestCase> = testIterator.next();
+            var currentTest : Class<unit2.TestCase> = testIterator.next();
             var testStatus : String = testTR.get("class");
 
             // Get cell information

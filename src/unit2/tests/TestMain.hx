@@ -23,45 +23,26 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package haxe.unit2;
+package unit2.tests;
 
-import haxe.PosInfos;
+import haxe.unit.TestRunner;
 
 /**
- * This kind of exception is thrown when an assertion fails in a test case
+ * Unit2 Test launcher
  */
-class AssertionException {
+class TestMain {
 
-    private var message : String;
-    private var posInfos : PosInfos;
-
-    /**
-     * Creates a new assertion error with an error message and the origin of the
-     * error.
-     */
-    public function new(message : String, posInfos : PosInfos) {
-        this.message = message;
-        this.posInfos = posInfos;
-    }
+    public function new() {}
 
     /**
-     * Returns the error message
+     * Application entry point
      */
-    public function getMessage() : String {
-        return this.message;
+    public static function main() : Void {
+        var testRunner : TestRunner = new TestRunner();
+        testRunner.add(new TestCaseTest());
+        testRunner.add(new TextOutputWriterTest());
+        testRunner.add(new XHTMLOutputWriterTest());
+        testRunner.run();
     }
 
-    /**
-     * Returns the informations about the origin of the error
-     */
-    public function getPosInfos() : PosInfos {
-        return this.posInfos;
-    }
-
-    /**
-     * Returns the string representation of the error
-     */
-    public function toString() : String {
-        return this.message;
-    }
 }
