@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, Nicolas Juneau
+ * Copyright (c) 2012-2013, Nicolas Juneau
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,7 +23,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- package haxe.unit2.output;
+package haxe.unit2.output;
 
 import haxe.unit2.TestCase;
 import haxe.unit2.TestRunner;

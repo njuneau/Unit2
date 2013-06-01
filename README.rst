@@ -1,10 +1,10 @@
-haXe Unit2 Test framework
+Haxe Unit2 Test framework
 ===============
 
 Description
 -----------------
 
-This is a modification of haXe's unit testing framework. Unit2 makes use of
+This is a modification of Haxe's unit testing framework. Unit2 makes use of
 class metadata_ in its test runners instead of relying on method names in order
 to detect test methods. It is inspired by JUnit_'s way of working.
 
@@ -26,7 +26,7 @@ Package inclusion
 
 The core framework is located inside the ``haxe.unit2`` package. The
 ``haxe.unit2.tests`` sub-package only contains the framework's test suite
-(which is written using the original haXe unit testing packages). The ``tests``
+(which is written using the original Haxe unit testing packages). The ``tests``
 sub-package is purely optional for running tests using Unit2.
 
 By including the ``haxe.unit2`` package in your projects, you'll be able to use
@@ -58,6 +58,13 @@ a ``haxe.unit2.output.TextOutputWriter`` instance and execute the
 a text formatted test report. You are free to output that string in the way you
 want. For example, you can print it in the console, trace it or even display a
 Web page with the results in it.
+
+Copyright information
+-----------------
+
+Some of the framework's files were taken directly from Haxe 2's source code.
+Although these files are now modified, they retain the copyright notices of the
+original files.
 
 .. _metadata: http://haxe.org/manual/metadata
 .. _JUnit: http://junit.sourceforge.net/

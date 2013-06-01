@@ -46,8 +46,8 @@ class TestResult {
     }
 
     /**
-     * Indicates if the test case is succeeding by checking if all tests
-     * statuses reports success.
+     * Indicates if the test case is a success by checking if all tests statuses
+     * are successes.
      */
     public function isSuccess() : Bool {
         var testIterator : Iterator<TestStatus> = this.m_tests.iterator();

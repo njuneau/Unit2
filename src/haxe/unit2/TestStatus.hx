@@ -24,8 +24,6 @@
  */
 package haxe.unit2;
 
-import haxe.PosInfos;
-
 /**
  * This class indicates the status of a test case
  */
