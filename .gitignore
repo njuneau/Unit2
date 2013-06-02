@@ -2,3 +2,6 @@ out
 .paths
 .project
 .settings/*
+haxedoc.xml
+index.html
+content/
