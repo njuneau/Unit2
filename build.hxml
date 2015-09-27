@@ -1,21 +1,13 @@
--cp src
-
-# JavaScript target
-# -js out/haxe_unit2.js
-
-# SWF 9 target
-# -swf9 out/haxe_unit2.swf
-
-# ActionScript3 target
-# -as3 out
-
-# Neko target
+# Test the Neko target
+-cp src/main/haxe
+-cp src/test/haxe
 -neko out/haxe_unit2.n
+-main unit2.tests.TestMain
 
-# PHP target
-# -php out
+--next
 
-# C++ target
-# -cpp out
-
+# Test the PHP target
+-cp src/main/haxe
+-cp src/test/haxe
+-php out/haxe_unit2_php/
 -main unit2.tests.TestMain

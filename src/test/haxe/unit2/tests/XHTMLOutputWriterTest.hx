@@ -31,8 +31,6 @@ import unit2.tests.mocks.MockTestCase1;
 import unit2.tests.mocks.MockTestCase2;
 import unit2.output.XHTMLOutputWriter;
 
-import neko.Lib;
-
 /**
  * This class tests the XHTML output writer
  */

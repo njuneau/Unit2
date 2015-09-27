@@ -31,8 +31,6 @@ import unit2.tests.mocks.MockTestCase1;
 import unit2.tests.mocks.MockTestCase2;
 import unit2.output.TextOutputWriter;
 
-import neko.Lib;
-
 class TextOutputWriterTest extends TestCase {
 
     /**
