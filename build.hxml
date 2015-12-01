@@ -4,10 +4,10 @@
 -neko out/haxe_unit2.n
 -main unit2.tests.TestMain
 
---next
-
+# --next
+#
 # Test the PHP target
--cp src/main/haxe
--cp src/test/haxe
--php out/haxe_unit2_php/
--main unit2.tests.TestMain
+# -cp src/main/haxe
+# -cp src/test/haxe
+# -php out/haxe_unit2_php/
+# -main unit2.tests.TestMain
