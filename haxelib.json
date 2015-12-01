@@ -1,0 +1,11 @@
+{
+    "name" : "unit2",
+    "url" : "https://github.com/njuneau/Unit2",
+    "licence" : "GPL",
+    "tags" : ["utility", "test"],
+    "description" : "A modification of Haxe's original unit testing framework",
+    "version" : "1.0.0-beta.1",
+    "classPath" : "src/main/haxe",
+    "releasenote" : "Initial release",
+    "contributors" : ["njuneau"]
+}
