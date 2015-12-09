@@ -1,8 +1,9 @@
 #!/bin/sh
 
+export programName="unit2"
 export releaseName="$1"
 export releaseFolder="release"
-export buildArchive="${releaseFolder}/${releaseName}.zip"
+export buildArchive="${releaseFolder}/${programName}-${releaseName}.zip"
 
 if [ $1 != "" ] ; then
 
