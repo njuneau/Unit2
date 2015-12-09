@@ -1,8 +1,8 @@
-Haxe Unit2 Test framework
-===============
+Unit2 Test framework
+====================
 
 Description
------------------
+-----------
 
 This is a modification of Haxe's unit testing framework. Unit2 makes use of
 class metadata_ in its test runners instead of relying on method names in order
@@ -19,21 +19,23 @@ Assertions now throw exceptions that can be caught by the TestRunner in order to
 detect errors.
 
 How to use
------------------
+----------
 
-Package inclusion
-~~~~~~~~~~~~~~~~~~~~~~
+Including in your projects
+``````````````````````````
 
-The core framework is located inside the ``unit2`` package. The
-``unit2.tests`` sub-package only contains the framework's test suite
-(which is written using the original Haxe unit testing packages). The ``tests``
-sub-package is purely optional for running tests using Unit2.
+For the latest release, install the **unit2** library through **haxelib**:
 
-By including the ``unit2`` package in your projects, you'll be able to use
-Unit2.
+.. code:: sh
+
+    haxelib install unit2 1.0.0-beta.1
+
+And include the following in your *HXML* files::
+
+    -lib unit2
 
 Writing a simple test suite
-~~~~~~~~~~~~~~~~~~~~~~
+```````````````````````````
 
 Start by creating a class that extends ``unit2.TestCase``. This class will
 hold your test case's unit tests. Add the ``@Test`` metadata tag to every
@@ -60,7 +62,7 @@ want. For example, you can print it in the console, trace it or even display a
 Web page with the results in it.
 
 Copyright information
------------------
+---------------------
 
 Some of the framework's files were taken directly from Haxe 2's source code.
 Although these files are now modified, they retain the copyright notices of the
