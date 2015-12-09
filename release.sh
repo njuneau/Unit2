@@ -34,7 +34,11 @@ if [ $1 != "" ] ; then
 
             if [ $submitToHaxelib == "y" ] ; then
                 haxelib submit $buildArchive
-                echo "Library submitted to haxelib"
+                if [ $? -eq 0 ] ; then
+                    echo "Library submitted to haxelib"
+                else
+                    echo "haxelib returned non-zero status"
+                fi
             else
                 echo "Submit skipped"
             fi
